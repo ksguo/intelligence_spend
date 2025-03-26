@@ -19,11 +19,14 @@ markdown-it-py==3.0.0
 MarkupSafe==3.0.2
 mccabe==0.7.0
 mdurl==0.1.2
+psycopg2==2.9.10
 pycodestyle==2.12.1
 pydantic==2.10.6
+pydantic-settings==2.8.1
 pydantic_core==2.27.2
 pyflakes==3.2.0
 Pygments==2.19.1
+pyhumps==3.8.0
 python-dotenv==1.0.1
 python-multipart==0.0.20
 PyYAML==6.0.2
