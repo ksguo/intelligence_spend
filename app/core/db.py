@@ -24,5 +24,8 @@ def get_db():
     db = SessionLocal()
     try:
         yield db
+        db.commit()  # 自动提交
+    except:
+        db.rollback()
     finally:
         db.close()

@@ -1,5 +1,7 @@
 from sqlalchemy import Boolean, Column, DateTime, Integer, String, Text
 from sqlalchemy.sql import func
+import uuid
+from sqlalchemy.dialects.postgresql import UUID
 
 from app.models.base import Base
 
@@ -9,7 +11,7 @@ class User(Base):
     User model for authentication and user management
     """
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True)
     username = Column(String(50), unique=True, index=True, nullable=False)
     email = Column(String(100), unique=True, index=True, nullable=False)
     hashed_password = Column(String(200), nullable=False)
