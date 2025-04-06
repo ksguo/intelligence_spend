@@ -1,10 +1,7 @@
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-
 from app.core.config import settings
-
 
 # SQLAlchemy database URL
 SQLALCHEMY_DATABASE_URL = (
@@ -24,8 +21,8 @@ def get_db():
     db = SessionLocal()
     try:
         yield db
-        db.commit()  # 自动提交
-    except:
+    except Exception as e:
         db.rollback()
+        raise e  # Re-raise the exception so FastAPI can handle it
     finally:
         db.close()

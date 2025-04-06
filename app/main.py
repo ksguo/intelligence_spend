@@ -1,9 +1,13 @@
 from fastapi import FastAPI
+from app.core.config import settings
+from app.routers import auth, registration, user
+
+app = FastAPI(
+    title="REWE Invoice API",
+    version=settings.api_version,
+)
 
 
-app = FastAPI()
-
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+app.include_router(auth.router, prefix=settings.api_prefix)
+app.include_router(registration.router, prefix=settings.api_prefix)
+app.include_router(user.router, prefix=settings.api_prefix)

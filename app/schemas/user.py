@@ -72,7 +72,11 @@ class User(UserBase):
     updated_at: datetime
 
     class Config:
-        orm_mode = True
+
+        model_config = {
+            "from_attributes": True,
+            "to_attributes": True,
+        }
 
 
 # For token authentication
