@@ -3,6 +3,8 @@ from sqlalchemy.sql import func
 import uuid
 from sqlalchemy.dialects.postgresql import UUID
 
+from sqlalchemy.orm import relationship
+
 from app.models.base import Base
 
 
@@ -30,3 +32,6 @@ class User(Base):
     updated_at = Column(
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
+
+    # Relationships
+    files = relationship("File", back_populates="user", cascade="all, delete-orphan")
