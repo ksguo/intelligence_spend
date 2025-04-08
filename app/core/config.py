@@ -18,6 +18,9 @@ class Settings(BaseSettings):
     algorithm: str
     access_token_expire_minutes: int
 
+    # openai
+    openai_api_key: str
+
     class Config:
         case_sensitive = False
         env_file = ".env"

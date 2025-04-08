@@ -35,3 +35,10 @@ class User(Base):
 
     # Relationships
     files = relationship("File", back_populates="user", cascade="all, delete-orphan")
+    invoices = relationship(
+        "Invoice", back_populates="user", cascade="all, delete-orphan"
+    )
+
+    consumer_analyses = relationship(
+        "ConsumerAnalysis", back_populates="user", cascade="all, delete-orphan"
+    )

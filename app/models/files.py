@@ -26,3 +26,6 @@ class File(Base):
     updated_at = Column(
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
+    invoice = relationship(
+        "Invoice", back_populates="file", uselist=False, cascade="all, delete-orphan"
+    )
