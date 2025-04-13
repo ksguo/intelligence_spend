@@ -5,14 +5,14 @@ from app.routers import auth, registration, user, files, ai_analysis, invitation
 
 
 app = FastAPI(
-    title="REWE Invoice API",
+    title="Intelligence Spend API",
     version=settings.api_version,
 )
 
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Add your Next.js URL
+    allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
