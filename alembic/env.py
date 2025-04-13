@@ -16,7 +16,7 @@ from app.models.files import File
 from app.models.invoice import Invoice
 from app.models.invoice_item import InvoiceItem
 from app.models.consumer_analysis import ConsumerAnalysis
-
+from app.models.invitation import Invitation
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

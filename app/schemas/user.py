@@ -21,6 +21,7 @@ class UserBase(BaseModel):
 # Properties to receive via API on creation
 class UserCreate(UserBase):
     password: str = Field(..., min_length=8, max_length=100)
+    invitation_code: Optional[str] = None
 
     @field_validator("password")
     def password_strength(cls, v):

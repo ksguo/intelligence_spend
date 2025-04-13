@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, DateTime, Integer, String, Text
+from sqlalchemy import Boolean, Column, DateTime, Integer, String, Text, ForeignKey
 from sqlalchemy.sql import func
 import uuid
 from sqlalchemy.dialects.postgresql import UUID
@@ -42,3 +42,6 @@ class User(Base):
     consumer_analyses = relationship(
         "ConsumerAnalysis", back_populates="user", cascade="all, delete-orphan"
     )
+    invitation_id = Column(Integer, ForeignKey("invitations.id"), nullable=True)
+
+    invitation = relationship("Invitation", back_populates="used_by")
