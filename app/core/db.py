@@ -17,3 +17,18 @@ if os.environ.get("ENVIRONMENT") == "production":
     engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"sslmode": "require"})
 else:
     engine = create_engine(SQLALCHEMY_DATABASE_URL)
+
+# Create a sessionmaker
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+
+# Dependency
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    except Exception as e:
+        db.rollback()
+        raise e  # Re-raise the exception so FastAPI can handle it
+    finally:
+        db.close()
