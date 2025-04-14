@@ -23,7 +23,6 @@ if os.environ.get("ENVIRONMENT") == "production":
         SQLALCHEMY_DATABASE_URL,
         connect_args={
             "sslmode": "require",
-            "options": "-c inet_client_addr_family=ipv4",  # Force IPv4
         },
     )
 else:
