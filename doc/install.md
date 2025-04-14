@@ -13,3 +13,5 @@ brew install ocrmypdf
 brew install tesseract-lang
 brew install imagemagick
 ``` 
+
+

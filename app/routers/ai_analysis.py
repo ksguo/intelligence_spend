@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 
 from app.core.db import get_db
 from app.auth import get_current_active_user
-from app.models.user import User as UserModel
+from app.models.users import User as UserModel
 
 from app.utils.consumer_data_extractor import ConsumerDataExtractor
 from app.utils.chatgpt_client import ChatGPTClient

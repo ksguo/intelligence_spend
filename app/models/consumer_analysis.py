@@ -15,8 +15,8 @@ class ConsumerAnalysis(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True)
 
     # 基本关联
-    user_id = Column(UUID(as_uuid=True), ForeignKey("user.id"), nullable=False)
-    user = relationship("User", back_populates="consumer_analyses")
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
+    user = relationship("Users", back_populates="consumer_analyses")
 
     # 分析结果
     analysis_data = Column(JSON, nullable=False)  # ChatGPT分析的结构化结果

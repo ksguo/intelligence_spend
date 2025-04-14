@@ -8,7 +8,7 @@ from sqlalchemy.orm import relationship
 from app.models.base import Base
 
 
-class User(Base):
+class Users(Base):
     """
     User model for authentication and user management
     """

@@ -19,8 +19,8 @@ class File(Base):
     is_active = Column(Boolean, default=True, nullable=False)
     is_processed = Column(Boolean, default=False, nullable=False)
 
-    user_id = Column(UUID(as_uuid=True), ForeignKey("user.id"), nullable=False)
-    user = relationship("User", back_populates="files")
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
+    user = relationship("Users", back_populates="files")
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(

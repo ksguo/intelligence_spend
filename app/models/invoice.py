@@ -40,8 +40,8 @@ class Invoice(Base):
     file_id = Column(UUID(as_uuid=True), ForeignKey("file.id"), nullable=False)
     file = relationship("File", back_populates="invoice")
 
-    user_id = Column(UUID(as_uuid=True), ForeignKey("user.id"), nullable=False)
-    user = relationship("User", back_populates="invoices")
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
+    user = relationship("Users", back_populates="invoices")
 
     # 商品项目关系
     items = relationship(

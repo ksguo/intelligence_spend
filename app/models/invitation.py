@@ -17,4 +17,4 @@ class Invitation(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     used_at = Column(DateTime(timezone=True), nullable=True)
 
-    used_by = relationship("User", uselist=False, back_populates="invitation")
+    used_by = relationship("Users", uselist=False, back_populates="invitation")

@@ -11,7 +11,7 @@ from app.core.db import SQLALCHEMY_DATABASE_URL
 from app.models.base import Base
 
 # 导入所有模型以确保它们被映射
-from app.models.user import User
+from app.models.users import Users
 from app.models.files import File
 from app.models.invoice import Invoice
 from app.models.invoice_item import InvoiceItem
