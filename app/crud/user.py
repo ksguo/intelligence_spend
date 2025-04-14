@@ -3,32 +3,32 @@ import uuid
 from datetime import datetime
 from sqlalchemy.orm import Session
 
-from app.models.users import User
+from app.models.users import Users
 from app.schemas.user import UserCreate, UserUpdate
 from app.utils.password import get_password_hash
 from app.crud.invitation import get_invitation_by_code, mark_invitation_as_used
 
 
-def get_user(db: Session, user_id: uuid.UUID) -> Optional[User]:
-    return db.query(User).filter(User.id == user_id).first()
+def get_user(db: Session, user_id: uuid.UUID) -> Optional[Users]:
+    return db.query(Users).filter(Users.id == user_id).first()
 
 
-def get_user_by_email(db: Session, email: str) -> Optional[User]:
+def get_user_by_email(db: Session, email: str) -> Optional[Users]:
 
-    return db.query(User).filter(User.email == email).first()
-
-
-def get_user_by_username(db: Session, username: str) -> Optional[User]:
-
-    return db.query(User).filter(User.username == username).first()
+    return db.query(Users).filter(Users.email == email).first()
 
 
-def get_users(db: Session, skip: int = 0, limit: int = 100) -> List[User]:
+def get_user_by_username(db: Session, username: str) -> Optional[Users]:
 
-    return db.query(User).offset(skip).limit(limit).all()
+    return db.query(Users).filter(Users.username == username).first()
 
 
-def create_user(db: Session, user_in: UserCreate) -> User:
+def get_users(db: Session, skip: int = 0, limit: int = 100) -> List[Users]:
+
+    return db.query(Users).offset(skip).limit(limit).all()
+
+
+def create_user(db: Session, user_in: UserCreate) -> Users:
     invitation = get_invitation_by_code(db, user_in.invitation_code)
     if not invitation:
         raise ValueError("Invalid invitation code")
@@ -50,7 +50,7 @@ def create_user(db: Session, user_in: UserCreate) -> User:
 
     hashed_password = get_password_hash(user_in.password)
 
-    db_user = User(
+    db_user = Users(
         username=user_in.username,
         email=user_in.email,
         hashed_password=hashed_password,
@@ -75,7 +75,7 @@ def create_user(db: Session, user_in: UserCreate) -> User:
 
 def update_user(
     db: Session, user_id: uuid.UUID, user_in: Union[UserUpdate, Dict[str, Any]]
-) -> User:
+) -> Users:
 
     user = get_user(db, user_id)
     if not user:
@@ -101,7 +101,7 @@ def update_user(
     return user
 
 
-def delete_user(db: Session, user_id: uuid.UUID) -> User:
+def delete_user(db: Session, user_id: uuid.UUID) -> Users:
 
     user = get_user(db, user_id)
     if not user:
@@ -122,7 +122,7 @@ def create_superuser(db: Session, user_in: UserCreate):
 
     # 创建超级用户
     hashed_password = get_password_hash(user_in.password)
-    db_user = User(
+    db_user = Users(
         email=user_in.email,
         username=user_in.username,
         hashed_password=hashed_password,
@@ -139,6 +139,8 @@ def create_superuser(db: Session, user_in: UserCreate):
     return db_user
 
 
-def get_superuser(db: Session, user_id: uuid.UUID) -> Optional[User]:
+def get_superuser(db: Session, user_id: uuid.UUID) -> Optional[Users]:
     """获取超级用户"""
-    return db.query(User).filter(User.id == user_id, User.is_superuser == True).first()
+    return (
+        db.query(Users).filter(Users.id == user_id, Users.is_superuser == True).first()
+    )

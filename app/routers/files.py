@@ -18,7 +18,7 @@ from sqlalchemy.orm import Session
 from app.auth import get_current_active_user
 
 from app.core.db import get_db
-from app.models.users import User as UserModel
+from app.models.users import Users as UserModel
 from app.crud.files import (
     create_file,
     get_user_files,

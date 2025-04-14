@@ -8,7 +8,7 @@ from app.auth import get_current_active_user, get_current_active_superuser
 from app.core.db import get_db
 from app.crud.user import get_user, get_users, update_user, delete_user
 from app.schemas.user import User, UserUpdate
-from app.models.users import User as UserModel
+from app.models.users import Users as UserModel
 
 router = APIRouter(tags=["users"])
 
